@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 public class MyPokerHand {
 
     public static void main(String[] args) throws Exception {
-
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter 5 Community Cards:");
         String commData = scanner.nextLine();
@@ -24,6 +23,7 @@ public class MyPokerHand {
         }
         List<Card> communityCards = new ArrayList<>();
         for (String communityCard : communityCardsArray) {
+            validateInput(communityCard);
             Card c = new Card(String.valueOf(communityCard.charAt(0)), String.valueOf(communityCard.charAt(1)));
             communityCards.add(c);
         }
@@ -41,6 +41,7 @@ public class MyPokerHand {
             }
             Player player = new Player();
             player.setName(playerDataArray[0]);
+            validateInput(playerDataArray[1], playerDataArray[2]);
             Card c1 = new Card(String.valueOf(playerDataArray[1].charAt(0)), String.valueOf(playerDataArray[1].charAt(1)));
             Card c2 = new Card(String.valueOf(playerDataArray[2].charAt(0)), String.valueOf(playerDataArray[2].charAt(1)));
             List<Card> playerCards = new ArrayList<>(Arrays.asList(c1, c2));
@@ -59,9 +60,14 @@ public class MyPokerHand {
                 .sorted(Comparator.comparing(p -> p.getResult().getRank()))
                 .collect(Collectors.toList());
         collect.stream().forEach(player -> System.out.println(player.getName() + " " + player.getResult().getRank()));
-
-
     }
 
+    private static void validateInput(String ... cardInputs) throws Exception {
+        for ( String input : cardInputs) {
+            if (!input.matches("^([2-9]|[T,J,Q,K,A])[D,S,C,H]")) {
+                throw new Exception("Invalid Card Input: " + input);
+            }
+        }
+    }
 
 }
