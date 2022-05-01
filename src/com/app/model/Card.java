@@ -3,9 +3,10 @@ package com.app.model;
 import com.app.util.FaceOrderUtil;
 
 public class Card {
-
+    // Club, Spade, Heart, Diamond
     private String suit;
 
+    // 2-9,T,J,Q,K,A
     private String face;
 
     // Int value for the card (i.e J is 11 , Q is 12 ... )

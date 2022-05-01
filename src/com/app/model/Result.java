@@ -1,22 +1,18 @@
 package com.app.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Result {
 
     private Ranking rank;
-    // TODO need to implement final Score incase of Tie between players
-    private int finalScore;
-    // TODO need to implement this to specify face card names ( i.e. Sam Two Pair Ace King )
-    private String[] cardDesc;
 
-    public Result(Ranking rank, String[] cardDesc) {
+    private List<String> cardDesc;
+
+
+    public Result(Ranking rank, List<String> cardDesc) {
         this.rank = rank;
         this.cardDesc = cardDesc;
-    }
-
-    public Result(Ranking rank, String[] cardDesc, int finalScore) {
-        this.rank = rank;
-        this.cardDesc = cardDesc;
-        this.finalScore = finalScore;
     }
 
     public Result(Ranking ranking) {
@@ -31,19 +27,14 @@ public class Result {
         this.rank = rank;
     }
 
-    public int getFinalScore() {
-        return finalScore;
+    public List<String> getCardDesc() {
+        if (cardDesc == null) {
+            this.cardDesc = new ArrayList<>();
+        }
+        return  this.cardDesc;
     }
 
-    public void setFinalScore(int finalScore) {
-        this.finalScore = finalScore;
-    }
-
-    public String[] getCardDesc() {
-        return cardDesc;
-    }
-
-    public void setCardDesc(String[] cardDesc) {
+    public void setCardDesc(List<String> cardDesc) {
         this.cardDesc = cardDesc;
     }
 }

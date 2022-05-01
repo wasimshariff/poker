@@ -5,6 +5,7 @@ import com.app.model.Player;
 import com.app.model.Ranking;
 import com.app.model.Result;
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -147,7 +148,8 @@ public class RankingUtil {
                 seq = 1;
             }
             if (seq == 5) {
-                return new Result(Ranking.STRAIGHT);
+                Card maxCard = sortedDistinctCards.get(i - 3);
+                return new Result(Ranking.STRAIGHT, Arrays.asList(new String[]{maxCard.getFace()}));
             }
         }
         return null;

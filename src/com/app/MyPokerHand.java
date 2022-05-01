@@ -10,6 +10,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class MyPokerHand {
 
@@ -59,7 +60,11 @@ public class MyPokerHand {
         List<Player> collect = players.stream()
                 .sorted(Comparator.comparing(p -> p.getResult().getRank()))
                 .collect(Collectors.toList());
-        collect.stream().forEach(player -> System.out.println(player.getName() + " " + player.getResult().getRank()));
+        IntStream.range(0, collect.size()).forEach(index -> {
+            Player player = collect.get(index);
+            int rank = index+1;
+            System.out.println(player.getName() + " " + rank + " " + player.getResult().getRank() + " " + (player.getResult().getCardDesc()));
+        });
     }
 
     private static void validateInput(String ... cardInputs) throws Exception {
